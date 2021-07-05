@@ -104,8 +104,8 @@ class AntColonyOptimizer:
         self.pheromone_matrix[np.eye(num_nodes) == 1] = 0
         self.heuristic_matrix = 1 / self.map
 
-        self._update_probabilities
-        self._reinstate_nodes
+        self._update_probabilities()
+        self._reinstate_nodes()
 
     def _reinstate_nodes(self):
         """
@@ -164,7 +164,7 @@ class AntColonyOptimizer:
         coordinates_i = []
         coordinates_j = []
 
-        for i, path in enumerate(paths):
+        for path_idx, path in enumerate(paths):
             score = 0
             coords_i = []
             coords_j = []
@@ -172,7 +172,7 @@ class AntColonyOptimizer:
                 coords_i.append(path[i])
                 coords_j.append(path[i + 1])
                 score += self.map[path[i], path[i + 1]]
-            scores[i] = score
+            scores[path_idx] = score
             coordinates_i.append(coords_i)
             coordinates_j.append(coords_j)
 
